@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Case | Estratégia ATS Senior — Flávio Campos</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --green-dark:   #0b3d2e;
+    --green-mid:    #0f4f3a;
+    --green-card:   #133d2e;
+    --teal:         #00c896;
+    --teal-dim:     #00a87a;
+    --orange:       #f5a623;
+    --orange-dark:  #d4861a;
+    --white:        #ffffff;
+    --white-60:     rgba(255,255,255,0.6);
+    --white-20:     rgba(255,255,255,0.08);
+    --white-10:     rgba(255,255,255,0.05);
+    --text-body:    rgba(255,255,255,0.82);
+    --radius:       16px;
+    --radius-sm:    10px;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--green-dark);
+    color: var(--white);
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 0 48px;
+    height: 64px;
+    background: rgba(11,61,46,0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(0,200,150,0.12);
+  }
+  .nav-logo {
+    font-size: 17px; font-weight: 800; letter-spacing: -0.5px;
+    color: var(--white);
+    display: flex; align-items: center; gap: 10px;
+  }
+  .nav-logo span { color: var(--teal); }
+  .nav-links { display: flex; gap: 32px; }
+  .nav-links a {
+    font-size: 13px; font-weight: 500; color: var(--white-60);
+    text-decoration: none; letter-spacing: 0.02em;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--white); }
+  .nav-cta {
+    background: var(--orange); color: var(--white);
+    font-size: 13px; font-weight: 700; padding: 10px 22px;
+    border-radius: 8px; text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s;
+  }
+  .nav-cta:hover { background: var(--orange-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    padding: 100px 48px 80px;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(0,200,150,0.07) 0%, transparent 70%),
+                radial-gradient(ellipse 50% 80% at -10% 80%, rgba(245,166,35,0.06) 0%, transparent 60%);
+  }
+  /* grid lines decorativas */
+  .hero-grid {
+    position: absolute; inset: 0; z-index: 0; opacity: 0.06;
+    background-image:
+      linear-gradient(rgba(0,200,150,0.8) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(0,200,150,0.8) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 70% 80% at 20% 50%, black 0%, transparent 70%);
+  }
+  /* curva decorativa direita */
+  .hero-curve {
+    position: absolute; right: -40px; top: 50%; transform: translateY(-50%);
+    width: 500px; height: 500px; z-index: 0; opacity: 0.35;
+  }
+
+  .hero-content { position: relative; z-index: 1; max-width: 680px; }
+
+  .hero-eyebrow {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: var(--white-20); border: 1px solid rgba(0,200,150,0.25);
+    border-radius: 100px; padding: 6px 16px;
+    font-size: 12px; font-weight: 600; color: var(--teal);
+    letter-spacing: 0.06em; text-transform: uppercase;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--teal); display: block;
+  }
+
+  .hero h1 {
+    font-size: clamp(38px, 5vw, 60px);
+    font-weight: 900; line-height: 1.08; letter-spacing: -2px;
+    margin-bottom: 24px;
+  }
+  .hero h1 em { color: var(--teal); font-style: normal; }
+  .hero h1 .orange { color: var(--orange); }
+
+  .hero-sub {
+    font-size: 17px; color: var(--text-body);
+    max-width: 540px; margin-bottom: 40px; line-height: 1.7;
+  }
+
+  .hero-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; }
+
+  .btn-primary {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--orange); color: var(--white);
+    font-size: 14px; font-weight: 700; padding: 14px 28px;
+    border-radius: 10px; text-decoration: none; letter-spacing: 0.03em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-primary:hover { background: var(--orange-dark); transform: translateY(-1px); }
+
+  .btn-ghost {
+    display: inline-flex; align-items: center; gap: 8px;
+    color: var(--white-60); font-size: 14px; font-weight: 500;
+    text-decoration: none; padding: 14px 4px;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .btn-ghost:hover { color: var(--white); border-color: var(--white); }
+
+  .hero-stats {
+    display: flex; gap: 48px; margin-top: 64px; padding-top: 40px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+  }
+  .hero-stat-num {
+    font-size: 32px; font-weight: 900; letter-spacing: -1px; color: var(--teal);
+    line-height: 1;
+  }
+  .hero-stat-label {
+    font-size: 12px; color: var(--white-60); margin-top: 4px;
+    line-height: 1.5; max-width: 120px;
+  }
+
+  /* ── SECTIONS ── */
+  section { padding: 96px 48px; }
+  .section-eyebrow {
+    font-size: 11px; font-weight: 700; letter-spacing: 0.12em;
+    text-transform: uppercase; color: var(--teal); margin-bottom: 16px;
+  }
+  .section-title {
+    font-size: clamp(28px, 3.5vw, 42px);
+    font-weight: 800; line-height: 1.15; letter-spacing: -1px;
+    margin-bottom: 16px;
+  }
+  .section-title em { color: var(--teal); font-style: normal; }
+  .section-sub {
+    font-size: 16px; color: var(--text-body); max-width: 560px; line-height: 1.7;
+  }
+  .section-header { margin-bottom: 56px; }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(0,200,150,0.3), transparent);
+    margin: 0 48px;
+  }
+
+  /* ── PROBLEMA ── */
+  .problema { background: var(--green-mid); }
+  .stats-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+    margin-bottom: 56px;
+  }
+  .stat-card {
+    background: var(--white-10); border: 1px solid rgba(0,200,150,0.15);
+    border-radius: var(--radius); padding: 32px 28px; text-align: center;
+  }
+  .stat-card .num {
+    font-size: 48px; font-weight: 900; letter-spacing: -2px;
+    color: var(--teal); line-height: 1; margin-bottom: 12px;
+  }
+  .stat-card .num.orange { color: var(--orange); }
+  .stat-card p { font-size: 14px; color: var(--text-body); line-height: 1.6; }
+  .stat-card .fonte {
+    font-size: 11px; color: var(--white-60); margin-top: 8px; font-style: italic;
+  }
+
+  /* ── SEGMENTOS ── */
+  .segmentos { background: var(--green-dark); }
+  .seg-tabs {
+    display: flex; gap: 8px; margin-bottom: 40px; flex-wrap: wrap;
+  }
+  .seg-tab {
+    padding: 10px 24px; border-radius: 100px;
+    font-size: 13px; font-weight: 600; cursor: pointer;
+    border: 1px solid rgba(255,255,255,0.15);
+    color: var(--white-60); background: transparent;
+    transition: all 0.2s;
+  }
+  .seg-tab.active, .seg-tab:hover {
+    background: var(--teal); color: var(--green-dark);
+    border-color: var(--teal);
+  }
+  .seg-panel { display: none; }
+  .seg-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+
+  .seg-info { display: flex; flex-direction: column; gap: 20px; }
+  .seg-dor-card {
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .seg-dor-card h4 {
+    font-size: 13px; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 16px;
+  }
+  .seg-dor-card ul { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+  .seg-dor-card li {
+    font-size: 14px; color: var(--text-body); padding-left: 18px; position: relative;
+    line-height: 1.5;
+  }
+  .seg-dor-card li::before {
+    content: ''; position: absolute; left: 0; top: 8px;
+    width: 6px; height: 6px; border-radius: 50%; background: var(--teal);
+  }
+
+  .seg-arg {
+    background: linear-gradient(135deg, rgba(0,200,150,0.1), rgba(0,200,150,0.04));
+    border: 1px solid rgba(0,200,150,0.25);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .seg-arg h4 {
+    font-size: 13px; font-weight: 700; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 12px;
+  }
+  .seg-arg .arg-text {
+    font-size: 15px; color: var(--white); line-height: 1.7; font-style: italic;
+  }
+  .seg-stat-box {
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius-sm); padding: 20px 24px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .seg-stat-box .big { font-size: 36px; font-weight: 900; color: var(--orange); letter-spacing: -1px; }
+  .seg-stat-box .label { font-size: 13px; color: var(--text-body); line-height: 1.5; }
+
+  .seg-calendar {
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 28px;
+  }
+  .seg-calendar h4 {
+    font-size: 13px; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px;
+  }
+  .cal-items { display: flex; flex-direction: column; gap: 12px; }
+  .cal-item { display: flex; gap: 14px; align-items: flex-start; }
+  .cal-badge {
+    min-width: 72px; padding: 4px 10px; border-radius: 100px;
+    font-size: 11px; font-weight: 700; text-align: center;
+    background: rgba(0,200,150,0.15); color: var(--teal);
+    border: 1px solid rgba(0,200,150,0.25); white-space: nowrap;
+  }
+  .cal-badge.hot { background: rgba(245,166,35,0.15); color: var(--orange); border-color: rgba(245,166,35,0.3); }
+  .cal-item p { font-size: 13px; color: var(--text-body); line-height: 1.5; padding-top: 2px; }
+
+  /* ── CRONOGRAMA ── */
+  .cronograma { background: var(--green-mid); }
+  .timeline {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px;
+  }
+  .quarter-block {
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); overflow: hidden;
+  }
+  .quarter-header {
+    padding: 16px 20px;
+    background: rgba(0,200,150,0.12);
+    border-bottom: 1px solid rgba(0,200,150,0.2);
+  }
+  .quarter-label {
+    font-size: 11px; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.1em;
+  }
+  .quarter-theme {
+    font-size: 13px; font-weight: 700; color: var(--white); margin-top: 4px;
+  }
+  .quarter-months { padding: 16px 20px; display: flex; flex-direction: column; gap: 12px; }
+  .month-item { }
+  .month-name {
+    font-size: 11px; font-weight: 700; color: var(--orange);
+    text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 4px;
+  }
+  .month-action { font-size: 12px; color: var(--text-body); line-height: 1.5; }
+  .webinar-badge {
+    display: inline-block; margin-top: 6px;
+    background: rgba(245,166,35,0.15); border: 1px solid rgba(245,166,35,0.3);
+    color: var(--orange); font-size: 10px; font-weight: 700;
+    padding: 2px 8px; border-radius: 100px; letter-spacing: 0.06em;
+  }
+
+  /* ── CANAIS ── */
+  .canais { background: var(--green-dark); }
+  .canais-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; }
+  .canal-card {
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 28px 20px; text-align: center;
+    transition: border-color 0.2s, transform 0.2s;
+  }
+  .canal-card:hover {
+    border-color: rgba(0,200,150,0.4); transform: translateY(-4px);
+  }
+  .canal-icon {
+    width: 48px; height: 48px; border-radius: 12px;
+    background: rgba(0,200,150,0.12); border: 1px solid rgba(0,200,150,0.2);
+    display: flex; align-items: center; justify-content: center;
+    margin: 0 auto 16px; font-size: 22px;
+  }
+  .canal-name {
+    font-size: 13px; font-weight: 700; color: var(--white); margin-bottom: 8px;
+  }
+  .canal-role { font-size: 12px; color: var(--text-body); line-height: 1.5; }
+  .canal-tag {
+    display: inline-block; margin-top: 12px;
+    background: rgba(0,200,150,0.1); color: var(--teal);
+    font-size: 10px; font-weight: 700; padding: 3px 10px;
+    border-radius: 100px; letter-spacing: 0.05em;
+  }
+
+  /* ── KPIs ── */
+  .kpis { background: var(--green-mid); }
+  .kpi-note {
+    background: rgba(0,200,150,0.06); border: 1px solid rgba(0,200,150,0.2);
+    border-radius: var(--radius-sm); padding: 14px 20px;
+    font-size: 13px; color: var(--white-60); font-style: italic;
+    margin-bottom: 40px; line-height: 1.6;
+  }
+  .kpi-groups { display: flex; flex-direction: column; gap: 32px; }
+  .kpi-group-title {
+    font-size: 12px; font-weight: 700; color: var(--teal);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    margin-bottom: 16px; padding-bottom: 10px;
+    border-bottom: 1px solid rgba(0,200,150,0.2);
+  }
+  .kpi-group-title.shared { color: var(--orange); border-color: rgba(245,166,35,0.2); }
+  .kpi-rows { display: flex; flex-direction: column; gap: 10px; }
+  .kpi-row {
+    display: grid; grid-template-columns: 2fr 1.5fr 2fr 1fr;
+    gap: 16px; align-items: center;
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.08);
+    border-radius: var(--radius-sm); padding: 16px 20px;
+  }
+  .kpi-row.shared-row { border-color: rgba(245,166,35,0.15); background: rgba(245,166,35,0.04); }
+  .kpi-name { font-size: 13px; font-weight: 600; color: var(--white); }
+  .kpi-meta { font-size: 13px; color: var(--teal); font-weight: 600; }
+  .kpi-meta.orange { color: var(--orange); }
+  .kpi-como { font-size: 12px; color: var(--text-body); }
+  .kpi-freq {
+    font-size: 11px; font-weight: 700; padding: 4px 12px; border-radius: 100px;
+    text-align: center; white-space: nowrap;
+  }
+  .freq-m { background: rgba(0,168,122,0.15); color: var(--teal); }
+  .freq-e { background: rgba(245,166,35,0.15); color: var(--orange); }
+  .freq-q { background: rgba(255,255,255,0.08); color: var(--white-60); }
+
+  /* ── TURNOVER ── */
+  .turnover { background: var(--green-dark); }
+  .turnover-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .turnover-card {
+    border-radius: var(--radius); padding: 32px 28px;
+    border: 1px solid rgba(255,255,255,0.1);
+  }
+  .turnover-card.agro { background: rgba(61,109,17,0.15); border-color: rgba(61,109,17,0.3); }
+  .turnover-card.log  { background: rgba(24,95,165,0.15); border-color: rgba(24,95,165,0.3); }
+  .turnover-card.var  { background: rgba(133,78,11,0.15); border-color: rgba(133,78,11,0.3); }
+  .turnover-seg {
+    font-size: 11px; font-weight: 700; text-transform: uppercase;
+    letter-spacing: 0.1em; margin-bottom: 20px;
+  }
+  .turnover-seg.agro { color: #7ecb45; }
+  .turnover-seg.log  { color: #5baef0; }
+  .turnover-seg.var  { color: #f5a623; }
+  .turnover-rate {
+    font-size: 52px; font-weight: 900; letter-spacing: -2px;
+    line-height: 1; margin-bottom: 6px;
+  }
+  .turnover-rate.agro { color: #7ecb45; }
+  .turnover-rate.log  { color: #5baef0; }
+  .turnover-rate.var  { color: #f5a623; }
+  .turnover-label { font-size: 13px; color: var(--white-60); margin-bottom: 20px; }
+  .turnover-custo {
+    background: rgba(0,0,0,0.2); border-radius: var(--radius-sm);
+    padding: 16px; font-size: 13px; color: var(--text-body); line-height: 1.6;
+  }
+  .turnover-custo strong { color: var(--white); }
+  .turnover-fonte {
+    font-size: 11px; color: var(--white-60); margin-top: 12px; font-style: italic;
+  }
+
+  /* ── ARGUMENTO SENIOR ── */
+  .argumento { background: var(--green-mid); }
+  .args-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .arg-card {
+    display: flex; gap: 20px; align-items: flex-start;
+    background: var(--white-10); border: 1px solid rgba(255,255,255,0.1);
+    border-radius: var(--radius); padding: 28px;
+    transition: border-color 0.2s;
+  }
+  .arg-card:hover { border-color: rgba(0,200,150,0.3); }
+  .arg-num {
+    min-width: 40px; height: 40px; border-radius: 10px;
+    background: rgba(0,200,150,0.15); border: 1px solid rgba(0,200,150,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 18px; font-weight: 900; color: var(--teal);
+  }
+  .arg-body h4 { font-size: 15px; font-weight: 700; margin-bottom: 8px; }
+  .arg-body p { font-size: 13px; color: var(--text-body); line-height: 1.65; }
+
+  /* ── CTA FINAL ── */
+  .cta-section {
+    background: var(--green-dark);
+    text-align: center; padding: 96px 48px;
+    position: relative; overflow: hidden;
+  }
+  .cta-bg {
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 60% 60% at 50% 50%, rgba(0,200,150,0.1) 0%, transparent 70%);
+  }
+  .cta-section > * { position: relative; z-index: 1; }
+  .cta-tag {
+    display: inline-block; margin-bottom: 24px;
+    background: rgba(0,200,150,0.1); border: 1px solid rgba(0,200,150,0.25);
+    color: var(--teal); font-size: 11px; font-weight: 700;
+    padding: 6px 16px; border-radius: 100px; letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+  .cta-section h2 {
+    font-size: clamp(28px, 4vw, 48px); font-weight: 900;
+    letter-spacing: -1.5px; line-height: 1.1; margin-bottom: 20px;
+  }
+  .cta-section h2 em { color: var(--teal); font-style: normal; }
+  .cta-section p {
+    font-size: 16px; color: var(--text-body); max-width: 520px;
+    margin: 0 auto 40px; line-height: 1.7;
+  }
+  .cta-actions { display: flex; justify-content: center; gap: 16px; flex-wrap: wrap; }
+  .btn-cta-main {
+    display: inline-flex; align-items: center; gap: 10px;
+    background: var(--teal); color: var(--green-dark);
+    font-size: 15px; font-weight: 800; padding: 16px 36px;
+    border-radius: 10px; text-decoration: none; letter-spacing: 0.02em;
+    transition: background 0.2s, transform 0.15s;
+  }
+  .btn-cta-main:hover { background: var(--teal-dim); transform: translateY(-2px); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: rgba(0,0,0,0.3);
+    border-top: 1px solid rgba(255,255,255,0.08);
+    padding: 32px 48px;
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 16px;
+  }
+  .footer-left { font-size: 13px; color: var(--white-60); }
+  .footer-left strong { color: var(--white); }
+  .footer-right { font-size: 12px; color: var(--white-60); font-style: italic; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 0 24px; }
+    .nav-links { display: none; }
+    section { padding: 64px 24px; }
+    .hero { padding: 100px 24px 64px; }
+    .stats-grid { grid-template-columns: 1fr; }
+    .seg-panel.active { grid-template-columns: 1fr; }
+    .timeline { grid-template-columns: 1fr 1fr; }
+    .canais-grid { grid-template-columns: repeat(2, 1fr); }
+    .turnover-grid { grid-template-columns: 1fr; }
+    .args-grid { grid-template-columns: 1fr; }
+    .kpi-row { grid-template-columns: 1fr 1fr; }
+    .hero-stats { gap: 28px; }
+    footer { flex-direction: column; text-align: center; }
+    .divider { margin: 0 24px; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation: none !important; transition: none !important; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-logo">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+      <path d="M10 2L18 6V14L10 18L2 14V6L10 2Z" fill="none" stroke="#00c896" stroke-width="1.5"/>
+      <path d="M10 6L14 8V12L10 14L6 12V8L10 6Z" fill="#00c896" opacity="0.4"/>
+    </svg>
+    Senior <span>ATS</span>
+  </div>
+  <div class="nav-links">
+    <a href="#problema">O Problema</a>
+    <a href="#segmentos">Segmentos</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#kpis">KPIs</a>
+    <a href="#cta">Case Completo</a>
+  </div>
+  <a href="case_ats_senior.pdf" target="_blank" class="nav-cta">Ver Case Completo →</a>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <svg class="hero-curve" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M250 50 Q420 120 420 250 Q420 380 250 450 Q80 380 80 250 Q80 120 250 50Z" stroke="#00c896" stroke-width="1" fill="none"/>
+    <path d="M250 100 Q380 160 380 250 Q380 340 250 400 Q120 340 120 250 Q120 160 250 100Z" stroke="#00c896" stroke-width="0.5" fill="none" opacity="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Case | Analista de Customer Marketing</div>
+    <h1>
+      Estratégia de<br>
+      <em>Cross Selling</em><br>
+      <span class="orange">ATS Senior</span>
+    </h1>
+    <p class="hero-sub">
+      Como ativar a base de clientes Senior nos segmentos de agronegócio, logística e varejo para gerar oportunidades qualificadas do ATS de Recrutamento e Seleção — antes que os picos cheguem.
+    </p>
+    <div class="hero-actions">
+      <a href="case_ats_senior.pdf" target="_blank" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+        Baixar Case Completo (PDF)
+      </a>
+      <a href="#problema" class="btn-ghost">Ver resumo ↓</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">segmentos mapeados</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">12</div>
+        <div class="hero-stat-label">meses de calendário</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">5</div>
+        <div class="hero-stat-label">canais de comunicação</div>
+      </div>
+      <div>
+        <div class="hero-stat-num">4</div>
+        <div class="hero-stat-label">webinars marco no ano</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PROBLEMA -->
+<section class="problema" id="problema">
+  <div class="section-header">
+    <div class="section-eyebrow">O Contexto</div>
+    <h2 class="section-title">O mercado já reconhece<br>a <em>dor</em> — falta a solução</h2>
+    <p class="section-sub">Dados do Harvard Business Review mostram que a pressão por modernização do R&S é real e urgente. A oportunidade dentro da base Senior está madura.</p>
+  </div>
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="num">91%</div>
+      <p>dos tomadores de decisão acreditam que a automação no recrutamento é necessária para o sucesso a longo prazo</p>
+      <div class="fonte">Fonte: Harvard Business Review</div>
+    </div>
+    <div class="stat-card">
+      <div class="num">92%</div>
+      <p>dizem que sua organização precisa investir mais em aquisição de talentos para se manter competitiva</p>
+      <div class="fonte">Fonte: Harvard Business Review</div>
+    </div>
+    <div class="stat-card">
+      <div class="num orange">51,3%</div>
+      <p>é a taxa média de turnover no Brasil — a maior do mundo. Repor um colaborador custa entre 50% e 200% do salário anual</p>
+      <div class="fonte">Fonte: Robert Half / CAGED 2024</div>
+    </div>
+  </div>
+  <div class="section-header" style="margin-bottom: 0; margin-top: 16px;">
+    <h3 class="section-title" style="font-size: 22px;">A linha central da campanha</h3>
+  </div>
+  <div style="background: rgba(0,200,150,0.06); border: 1px solid rgba(0,200,150,0.2); border-left: 4px solid #00c896; border-radius: 12px; padding: 28px 32px; margin-top: 20px; max-width: 780px;">
+    <p style="font-size: 18px; font-style: italic; line-height: 1.7; color: var(--white);">
+      "Você já confia na Senior para gerir seus colaboradores. Agora, deixe a Senior te ajudar a contratar os melhores — antes que o pico chegue."
+    </p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SEGMENTOS -->
+<section class="segmentos" id="segmentos">
+  <div class="section-header">
+    <div class="section-eyebrow">Estratégia por Segmento</div>
+    <h2 class="section-title">Abordagem <em>exclusiva</em><br>para cada setor</h2>
+    <p class="section-sub">Cada segmento tem dores, aspirações e janelas estratégicas distintas. A comunicação reflete isso.</p>
+  </div>
+
+  <div class="seg-tabs">
+    <button class="seg-tab active" onclick="showSeg('agro')">🌱 Agronegócio</button>
+    <button class="seg-tab" onclick="showSeg('log')">🚛 Logística</button>
+    <button class="seg-tab" onclick="showSeg('var')">🛒 Varejo</button>
+  </div>
+
+  <!-- AGRO -->
+  <div class="seg-panel active" id="seg-agro">
+    <div class="seg-info">
+      <div class="seg-dor-card">
+        <h4>Principais dores</h4>
+        <ul>
+          <li>Contratar em volume e velocidade nas janelas de safra — sem processo estruturado, o timing nunca fecha</li>
+          <li>Mão de obra qualificada escassa nas regiões produtoras</li>
+          <li>Alta rotatividade de temporários — custosa e recorrente a cada ciclo</li>
+          <li>Obrigações de SST e medicina admissional sem integração com R&S</li>
+          <li>Dificuldade de atrair jovens — percepção do agro como setor "antigo"</li>
+        </ul>
+      </div>
+      <div class="seg-stat-box">
+        <div class="big">+40%</div>
+        <div class="label">de turnover nos picos de safra. Custo de reposição: R$ 3.000–R$ 6.000 por temporário</div>
+      </div>
+      <div class="seg-arg">
+        <h4>Argumento de Cross Selling</h4>
+        <p class="arg-text">"Na próxima safra, o ATS Senior monta seu banco de talentos, faz a triagem com IA e integra direto com SST para o ASO admissional — tudo no sistema que seu time já conhece."</p>
+      </div>
+    </div>
+    <div class="seg-calendar">
+      <h4>Janelas estratégicas do ano</h4>
+      <div class="cal-items">
+        <div class="cal-item">
+          <span class="cal-badge">Jan–Fev</span>
+          <p>Balanço pós-colheita: apresentar o custo real do turnover da última safra</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Abr ★</span>
+          <p>Webinar marco: "Prepare seu RH para a próxima safra" — maior janela de conversão</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Mai</span>
+          <p>Follow-up pós-webinar + oferta exclusiva para clientes Senior</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Ago ★</span>
+          <p>Ativação pré-safra de verão — urgência de banco de talentos ativo</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Dez</span>
+          <p>Semente 2027: "A próxima safra começa com o RH bem recrutado"</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOGÍSTICA -->
+  <div class="seg-panel" id="seg-log">
+    <div class="seg-info">
+      <div class="seg-dor-card">
+        <h4>Principais dores</h4>
+        <ul>
+          <li>Turnover crônico de motoristas e operadores — RH em modo reposição permanente</li>
+          <li>69% das empresas não conseguem preencher vagas com candidatos qualificados</li>
+          <li>Motoristas: idade média de 53,5 anos — gap geracional sem pipeline de substituição</li>
+          <li>Triagem complexa: CNH categoria, MOPP, medicina do trabalho</li>
+          <li>Picos de e-commerce exigem contratação emergencial recorrente</li>
+        </ul>
+      </div>
+      <div class="seg-stat-box">
+        <div class="big">+94%</div>
+        <div class="label">de crescimento em vagas abertas em 2024 vs. 2023. Custo de reposição de motorista: até R$ 10.000</div>
+      </div>
+      <div class="seg-arg">
+        <h4>Argumento de Cross Selling</h4>
+        <p class="arg-text">"O ATS Senior filtra automaticamente por CNH, MOPP e pré-requisitos técnicos, mantém seu banco de motoristas sempre aquecido e integra com a medicina do trabalho que você já usa no HCM."</p>
+      </div>
+    </div>
+    <div class="seg-calendar">
+      <h4>Janelas estratégicas do ano</h4>
+      <div class="cal-items">
+        <div class="cal-item">
+          <span class="cal-badge">Jan–Fev</span>
+          <p>Retrospectiva do pico natalino: quanto custou o apagão de pessoal?</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Mar–Mai</span>
+          <p>Educação de produto: triagem automática por requisito técnico + case de cliente</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Jul ★</span>
+          <p>Webinar marco: "Black Friday começa agora no RH da logística"</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Ago–Set ★</span>
+          <p>CTA direto + demonstração com foco em integração SST + ATS — maior janela de conversão</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Dez</span>
+          <p>Retrospectiva 2026 + semente 2027</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- VAREJO -->
+  <div class="seg-panel" id="seg-var">
+    <div class="seg-info">
+      <div class="seg-dor-card">
+        <h4>Principais dores</h4>
+        <ul>
+          <li>Turnover crônico em funções operacionais — o ciclo de reposição nunca para</li>
+          <li>Contratação sazonal em volume e urgência: Natal, Black Friday, Dia das Mães</li>
+          <li>Gestão descentralizada de múltiplas lojas sem padronização</li>
+          <li>Admissão lenta gera desistência — candidato aprovado aceita outra oferta antes de assinar</li>
+          <li>98 mil vagas temporárias abertas só no Natal de 2024</li>
+        </ul>
+      </div>
+      <div class="seg-stat-box">
+        <div class="big">58%</div>
+        <div class="label">de turnover em supermercados (Future Tank/Asserj 2024). Custo por reposição: R$ 2.500–R$ 5.000</div>
+      </div>
+      <div class="seg-arg">
+        <h4>Argumento de Cross Selling</h4>
+        <p class="arg-text">"Padronize o processo em todas as lojas, escale a contratação sazonal sem contratar mais RH, e conecte aprovação com admissão digital para não perder candidato no meio do caminho."</p>
+      </div>
+    </div>
+    <div class="seg-calendar">
+      <h4>Janelas estratégicas do ano</h4>
+      <div class="cal-items">
+        <div class="cal-item">
+          <span class="cal-badge">Jan</span>
+          <p>Retrospectiva: o que custou o Natal sem ATS — vagas não preenchidas = vendas perdidas</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Mar ★</span>
+          <p>Webinar: "Como escalar contratações sazonais sem aumentar o RH"</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Ago ★</span>
+          <p>Webinar marco: "Seu RH está pronto para a Black Friday?" — maior janela de conversão</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge hot">Set ★</span>
+          <p>Oferta especial: implantação garantida antes do Natal — urgência real</p>
+        </div>
+        <div class="cal-item">
+          <span class="cal-badge">Dez</span>
+          <p>Early bird 2027 — feche em dezembro, comece 2027 pronto</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- TURNOVER -->
+<section class="turnover" id="turnover">
+  <div class="section-header">
+    <div class="section-eyebrow">O Argumento Financeiro</div>
+    <h2 class="section-title">Turnover custa <em>dinheiro real</em></h2>
+    <p class="section-sub">Dados atualizados de 2024–2025 para embasar a comunicação financeira da campanha em cada segmento.</p>
+  </div>
+  <div class="turnover-grid">
+    <div class="turnover-card agro">
+      <div class="turnover-seg agro">🌱 Agronegócio</div>
+      <div class="turnover-rate agro">+40%</div>
+      <div class="turnover-label">turnover nos picos de safra</div>
+      <div class="turnover-custo">
+        Custo de reposição por temporário rural: <strong>R$ 3.000–R$ 6.000</strong>. Com 30 contratações por safra e 40% de turnover, o desperdício pode ultrapassar <strong>R$ 72.000 por ciclo</strong>.
+      </div>
+      <div class="turnover-fonte">Woba RH, AGROSearch 2025, SHRM</div>
+    </div>
+    <div class="turnover-card log">
+      <div class="turnover-seg log">🚛 Logística</div>
+      <div class="turnover-rate log">25–40%</div>
+      <div class="turnover-label">ao ano; acima de 40% no transporte rodoviário</div>
+      <div class="turnover-custo">
+        Reposição de motorista profissional: até <strong>R$ 10.000</strong> por colaborador. Com 50 motoristas e 30% de turnover, o custo anual pode chegar a <strong>R$ 150.000</strong>.
+      </div>
+      <div class="turnover-fonte">Tigerlog 2025, Loris Consultoria, Robert Half 2024</div>
+    </div>
+    <div class="turnover-card var">
+      <div class="turnover-seg var">🛒 Varejo</div>
+      <div class="turnover-rate var">36–58%</div>
+      <div class="turnover-label">ao ano; supermercados chegam a 58,2%</div>
+      <div class="turnover-custo">
+        Custo por reposição em funções operacionais: <strong>R$ 2.500–R$ 5.000</strong>. Com 100 colaboradores e 40% de turnover, o impacto pode ultrapassar <strong>R$ 300.000 ao ano</strong>.
+      </div>
+      <div class="turnover-fonte">SBVC/CNDL, Future Tank/Asserj 2024, InfraFM 2025</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CRONOGRAMA -->
+<section class="cronograma" id="cronograma">
+  <div class="section-header">
+    <div class="section-eyebrow">Calendário 2026</div>
+    <h2 class="section-title">Cronograma anual<br>da <em>campanha</em></h2>
+    <p class="section-sub">A regra central: a comunicação de urgência chega sempre antes do pico, não durante. Os webinars marcam os momentos de conversão máxima.</p>
+  </div>
+  <div class="timeline">
+    <div class="quarter-block">
+      <div class="quarter-header">
+        <div class="quarter-label">Q1 — Jan a Mar</div>
+        <div class="quarter-theme">Balanço e Educação</div>
+      </div>
+      <div class="quarter-months">
+        <div class="month-item">
+          <div class="month-name">Janeiro</div>
+          <div class="month-action">Retrospectiva dos picos de 2025 — apresentar o custo real do turnover por segmento</div>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Fevereiro</div>
+          <div class="month-action">Conteúdo educativo: dados setoriais de turnover, argumento financeiro</div>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Março</div>
+          <div class="month-action">Apresentação de produto + webinar varejo: "Como escalar contratações sazonais"</div>
+          <span class="webinar-badge">WEBINAR VAREJO</span>
+        </div>
+      </div>
+    </div>
+    <div class="quarter-block">
+      <div class="quarter-header">
+        <div class="quarter-label">Q2 — Abr a Jun</div>
+        <div class="quarter-theme">Conversão Agro</div>
+      </div>
+      <div class="quarter-months">
+        <div class="month-item">
+          <div class="month-name">Abril</div>
+          <div class="month-action">Webinar marco agro: "Prepare seu RH para a próxima safra" + CTA demo</div>
+          <span class="webinar-badge">WEBINAR AGRO</span>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Maio</div>
+          <div class="month-action">Follow-up pós-webinar + ativação Dia das Mães para varejo</div>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Junho</div>
+          <div class="month-action">Manutenção de base — conteúdo de planejamento de 2ª safra e mid-year e-commerce</div>
+        </div>
+      </div>
+    </div>
+    <div class="quarter-block">
+      <div class="quarter-header">
+        <div class="quarter-label">Q3 — Jul a Set</div>
+        <div class="quarter-theme">Janela de Ouro</div>
+      </div>
+      <div class="quarter-months">
+        <div class="month-item">
+          <div class="month-name">Julho</div>
+          <div class="month-action">Webinar marco logística: "Black Friday começa agora no RH da logística"</div>
+          <span class="webinar-badge">WEBINAR LOGÍSTICA</span>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Agosto</div>
+          <div class="month-action">Webinar marco varejo: "Seu RH está pronto para a Black Friday?" + CTA urgente</div>
+          <span class="webinar-badge">WEBINAR VAREJO</span>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Setembro</div>
+          <div class="month-action">Conversão máxima — follow-up personalizado + oferta de implantação acelerada</div>
+        </div>
+      </div>
+    </div>
+    <div class="quarter-block">
+      <div class="quarter-header">
+        <div class="quarter-label">Q4 — Out a Dez</div>
+        <div class="quarter-theme">Colheita e Semente</div>
+      </div>
+      <div class="quarter-months">
+        <div class="month-item">
+          <div class="month-name">Outubro</div>
+          <div class="month-action">Manutenção + conteúdo de antecipação Black Friday por segmento</div>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Novembro</div>
+          <div class="month-action">Black Friday — capturar dores em tempo real + urgência para Natal</div>
+        </div>
+        <div class="month-item">
+          <div class="month-name">Dezembro</div>
+          <div class="month-action">Semente 2027 — early bird e retrospectiva para fechar o ciclo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CANAIS -->
+<section class="canais" id="canais">
+  <div class="section-header">
+    <div class="section-eyebrow">Canais de Comunicação</div>
+    <h2 class="section-title">5 canais, <em>um objetivo</em>:<br>gerar a demo</h2>
+    <p class="section-sub">Cada canal tem papel específico no funil — de awareness até o agendamento de demonstração.</p>
+  </div>
+  <div class="canais-grid">
+    <div class="canal-card">
+      <div class="canal-icon">✉️</div>
+      <div class="canal-name">E-mail</div>
+      <div class="canal-role">Canal primário de nurturing. Régua segmentada por setor com cadência mensal e intensificação nos pré-picos.</div>
+      <span class="canal-tag">Nurturing</span>
+    </div>
+    <div class="canal-card">
+      <div class="canal-icon">💬</div>
+      <div class="canal-name">WhatsApp via CS</div>
+      <div class="canal-role">Ativação consultiva e personalizada. O CS aborda com um dado do setor do cliente — alta conversão em leads quentes.</div>
+      <span class="canal-tag">Conversão</span>
+    </div>
+    <div class="canal-card">
+      <div class="canal-icon">🖥️</div>
+      <div class="canal-name">Área do Cliente</div>
+      <div class="canal-role">Banners no sistema que o cliente já usa. Ponto de contato passivo de alta visibilidade com CTA direto.</div>
+      <span class="canal-tag">Awareness</span>
+    </div>
+    <div class="canal-card">
+      <div class="canal-icon">📱</div>
+      <div class="canal-name">Redes Sociais</div>
+      <div class="canal-role">Reforço de awareness e autoridade com conteúdo educativo sobre turnover e RH por setor.</div>
+      <span class="canal-tag">Topo de funil</span>
+    </div>
+    <div class="canal-card">
+      <div class="canal-icon">🎙️</div>
+      <div class="canal-name">Webinar / Lives</div>
+      <div class="canal-role">Maior marco de cada janela estratégica. O follow-up nas 48h seguintes é crítico — maior intenção de compra.</div>
+      <span class="canal-tag">Marco de conversão</span>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ARGUMENTO SENIOR -->
+<section class="argumento" id="argumento">
+  <div class="section-header">
+    <div class="section-eyebrow">Por que Senior</div>
+    <h2 class="section-title">O ATS que faz mais sentido<br>para quem já é <em>cliente Senior</em></h2>
+    <p class="section-sub">O argumento principal não é "melhor ATS do mercado" — é custo total menor, zero fricção de integração e jornada fechada do candidato ao holerite.</p>
+  </div>
+  <div class="args-grid">
+    <div class="arg-card">
+      <div class="arg-num">1</div>
+      <div class="arg-body">
+        <h4>Sem nova implantação</h4>
+        <p>Ativar o ATS Senior é habilitar um módulo dentro do ambiente que o cliente já conhece. Nenhum novo sistema para aprender, nenhum período de adaptação longo.</p>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">2</div>
+      <div class="arg-body">
+        <h4>Custo total menor</h4>
+        <p>Quem usa Gupy + Senior mantém dois contratos e dois suportes. Com o ATS Senior, o cliente tem um único ponto de contato e uma única fatura.</p>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">3</div>
+      <div class="arg-body">
+        <h4>Integração nativa com HCM, SST, Ponto e Admissão Digital</h4>
+        <p>Do candidato aprovado ao colaborador na folha em um único fluxo. Para logística e agro, inclui medicina admissional e controles de NR sem retrabalho.</p>
+      </div>
+    </div>
+    <div class="arg-card">
+      <div class="arg-num">4</div>
+      <div class="arg-body">
+        <h4>+35 anos e +5.200 clientes</h4>
+        <p>A Senior já gerencia 11 milhões de vidas na América Latina. O cliente não está comprando uma promessa — está expandindo uma relação que já existe.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- KPIs -->
+<section class="kpis" id="kpis">
+  <div class="section-header">
+    <div class="section-eyebrow">Métricas de Sucesso</div>
+    <h2 class="section-title">KPIs da <em>campanha</em></h2>
+    <p class="section-sub">9 indicadores-chave distribuídos em 4 grupos. CTA final: demo agendada.</p>
+  </div>
+  <div class="kpi-note">* As metas numéricas são figurativas e baseadas em benchmarks públicos de mercado (RD Station, HubSpot, Campaign Monitor). Devem ser calibradas no Q1 com dados históricos reais da Senior.</div>
+  <div class="kpi-groups">
+
+    <div>
+      <div class="kpi-group-title">Leads Qualificados</div>
+      <div class="kpi-rows">
+        <div class="kpi-row">
+          <div class="kpi-name">Volume de MQLs por segmento</div>
+          <div class="kpi-meta">Calibrar no Q1</div>
+          <div class="kpi-como">CRM + UTM nos CTAs</div>
+          <div class="kpi-freq freq-m">Mensal</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-name">Taxa de conversão da base em MQL</div>
+          <div class="kpi-meta">3–5% da base ativa *</div>
+          <div class="kpi-como">MQLs ÷ clientes ativos no segmento</div>
+          <div class="kpi-freq freq-m">Mensal</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="kpi-group-title">Engajamento da Base</div>
+      <div class="kpi-rows">
+        <div class="kpi-row">
+          <div class="kpi-name">Taxa de abertura dos e-mails</div>
+          <div class="kpi-meta">28–35% *</div>
+          <div class="kpi-como">Plataforma de e-mail marketing</div>
+          <div class="kpi-freq freq-m">Por disparo</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-name">CTR no CTA de agendamento</div>
+          <div class="kpi-meta">4–7% sobre abertos *</div>
+          <div class="kpi-como">Cliques no CTA ÷ e-mails abertos</div>
+          <div class="kpi-freq freq-m">Por disparo</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-name">Inscrições e comparecimento nos webinars</div>
+          <div class="kpi-meta">8–12% inscritos; 40–55% show *</div>
+          <div class="kpi-como">Plataforma de webinar</div>
+          <div class="kpi-freq freq-e">Por evento</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="kpi-group-title">Demonstrações Agendadas</div>
+      <div class="kpi-rows">
+        <div class="kpi-row">
+          <div class="kpi-name">Volume de demos agendadas</div>
+          <div class="kpi-meta">Calibrar no Q1</div>
+          <div class="kpi-como">CRM — campo de origem obrigatório</div>
+          <div class="kpi-freq freq-m">Mensal</div>
+        </div>
+        <div class="kpi-row">
+          <div class="kpi-name">Taxa de conversão MQL → demo</div>
+          <div class="kpi-meta">25–35% dos MQLs *</div>
+          <div class="kpi-como">Demos agendadas ÷ MQLs gerados</div>
+          <div class="kpi-freq freq-m">Mensal</div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="kpi-group-title shared">Negócios Fechados — Indicador Compartilhado com Comercial</div>
+      <div class="kpi-rows">
+        <div class="kpi-row shared-row">
+          <div class="kpi-name">Taxa de conversão demo → proposta</div>
+          <div class="kpi-meta orange">40–60% *</div>
+          <div class="kpi-como">CRM — etapas do funil comercial</div>
+          <div class="kpi-freq freq-q">Trimestral</div>
+        </div>
+        <div class="kpi-row shared-row">
+          <div class="kpi-name">Contratos fechados com origem na campanha</div>
+          <div class="kpi-meta orange">Meta pós-Q1</div>
+          <div class="kpi-como">UTM + campo de origem no CRM</div>
+          <div class="kpi-freq freq-q">Trimestral</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CTA FINAL -->
+<section class="cta-section" id="cta">
+  <div class="cta-bg"></div>
+  <div class="cta-tag">Case Completo</div>
+  <h2>Acesse o documento<br>com a <em>estratégia completa</em></h2>
+  <p>Cronograma detalhado mês a mês, estratégia por segmento, matriz de argumentos, dados de turnover com fontes e seção de KPIs — tudo no PDF.</p>
+  <div class="cta-actions">
+    <a href="case_ats_senior.pdf" target="_blank" class="btn-cta-main">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/><polyline points="10 9 9 9 8 9"/></svg>
+      Baixar Case em PDF
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-left">
+    Produzido por <strong>Flávio Campos</strong> · Case | Analista de Customer Marketing · Senior Sistemas
+  </div>
+  <div class="footer-right">Estratégia de Cross Selling ATS · 2026</div>
+</footer>
+
+<script>
+function showSeg(seg) {
+  document.querySelectorAll('.seg-panel').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.seg-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('seg-' + seg).classList.add('active');
+  event.target.classList.add('active');
+}
+</script>
+</body>
+</html>
